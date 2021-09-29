@@ -18,4 +18,15 @@ jobs:
         sudo luarocks install luacheck
     - name: Run luacheck
       run: |
-        make lint
+        sudo make lint
+  style-lint:
+    runs-on: [ubuntu-latest]
+    steps: 
+    - name: Checkout sources
+      uses: actions/checkout@v2
+    - name: Lint with stylua
+      uses: JohnnyMorganz/stylua-action@1.0.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        # CLI arguments
+        args: --check .
